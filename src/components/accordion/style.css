@@ -1,0 +1,27 @@
+.accordion-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.accordion-question{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-item{
+    width: 350px;
+    min-height: 10px;
+    max-height: 120px;
+    padding: 14px;
+    background-color: aqua;
+}
+
+.accordion-answer{
+    margin-top: 12px;
+}
