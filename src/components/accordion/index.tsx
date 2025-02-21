@@ -12,14 +12,10 @@ export const Accordion: React.FC = () => {
     const selectAccordion = ( id : number) : void => {
         setSelectedAccordion((prev) => {
             if(enableMultipleSelection){
-                if(prev[id]){
-                    prev = { ...prev, [id] : false};
-                }else{
-                    prev = { ...prev, [id] : true};
-                }
+                prev = { ...prev, [id] : !prev[id]};
                 return prev
             }else{
-               return { [id]: true}
+               return { [id]: !prev[id]}
             }
         });
     }
