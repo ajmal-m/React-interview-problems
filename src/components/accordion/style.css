@@ -25,3 +25,18 @@
 .accordion-answer{
     margin-top: 12px;
 }
+
+.accordion-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;;
+}
+
+.accordion-container button{
+    padding: 12px;
+    background-color: rgb(149, 255, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

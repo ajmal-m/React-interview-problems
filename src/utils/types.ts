@@ -5,4 +5,9 @@ export type AccordionData = {
 }
 
 
+export type selectedAccordion = {
+    [index:number] : boolean
+}
+
+
 export type Accordion = AccordionData[];

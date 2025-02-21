@@ -1,48 +1,62 @@
 import React, { useState } from "react";
 import './style.css';
 import data from './index';
+import { selectedAccordion } from '../../utils/types';
 
 
 export const Accordion: React.FC = () => {
 
-    const [selectedAccordion, setSelectedAccordion] = useState<number | null>();
+    const [selectedAccordion, setSelectedAccordion] = useState<selectedAccordion>({});
+    const [enableMultipleSelection, setMultipleSelection] = useState<boolean>(false);
 
-    const selectAccordion = ( id : number) => {
+    const selectAccordion = ( id : number) : void => {
         setSelectedAccordion((prev) => {
-            if(prev == id){
-                return null
+            if(enableMultipleSelection){
+                if(prev[id]){
+                    prev = { ...prev, [id] : false};
+                }else{
+                    prev = { ...prev, [id] : true};
+                }
+                return prev
             }else{
-                return id;
+               return { [id]: true}
             }
         });
     }
 
+    const selectMultiple = () : void => {
+        setMultipleSelection((prev) => (!prev));
+    }
+
     return(
         <>
-            <div className="accordion-wrapper">
-                {
-                    data.map((item) => {
-                        return (
-                            <div className="accordion-item">
-                                <div className="accordion-question" onClick={() => selectAccordion(item.id)}>
-                                    <div>
-                                        <p>{item.question}</p>
+            <div className="accordion-container">
+                <button onClick={selectMultiple}>SELECT MULTIPLE OPTION</button>
+                <div className="accordion-wrapper">
+                    {
+                        data.map((item, index) => {
+                            return (
+                                <div className="accordion-item" key={index}>
+                                    <div className="accordion-question" onClick={() => selectAccordion(item.id)}>
+                                        <div>
+                                            <p>{item.question}</p>
+                                        </div>
+                                        <div>
+                                            <span>+</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span>+</span>
-                                    </div>
-                                </div>
-                                {
+                                    {
 
-                                    selectedAccordion && selectedAccordion == item.id &&
-                                    <div className="accordion-answer" >
-                                         <p>{item.answer}</p>
-                                    </div>
-                                }
-                            </div>
-                        )
-                    })
-                }
+                                        selectedAccordion && selectedAccordion[item.id] &&
+                                        <div className="accordion-answer" >
+                                            <p>{item.answer}</p>
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         </>
     )
