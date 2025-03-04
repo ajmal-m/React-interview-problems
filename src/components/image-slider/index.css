@@ -1,0 +1,45 @@
+.imagecontent{
+    width: 400px;
+    height: 400px;
+}
+
+.leftarrow{
+   color: red;
+   position: absolute;
+   top: 50%;
+   cursor: pointer;
+   width: 50px;
+   height: 50px;
+}
+
+
+.rightArrow{
+   color: red;
+   position: absolute;
+   top: 50%;
+   left: 90%;
+   cursor: pointer;
+   width: 50px;
+   height: 50px;
+}
+
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    gap:4px;
+    position: absolute;
+    top: 90%;
+    left: 30%;
+}
+
+.pagination-hole{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+   background-color: white;
+}
+
+.pagination-active{
+    background-color: red;
+}

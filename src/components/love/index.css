@@ -1,0 +1,9 @@
+.active{
+    color: rgb(255, 217, 0);
+}
+
+.btn-size{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}

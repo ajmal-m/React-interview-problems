@@ -1,0 +1,22 @@
+export const images = [
+    {
+        id:1,
+        src:'https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D'
+    },
+    {
+        id:2,
+        src:'https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg'
+    },
+    {
+        id:3,
+        src:'https://images.pexels.com/photos/1054655/pexels-photo-1054655.jpeg?cs=srgb&dl=pexels-hsapir-1054655.jpg&fm=jpg'
+    },
+    {
+        id:4,
+        src:'https://t3.ftcdn.net/jpg/02/70/35/00/360_F_270350073_WO6yQAdptEnAhYKM5GuA9035wbRnVJSr.jpg'
+    },
+    {
+        id:5,
+        src:'https://static.vecteezy.com/system/resources/thumbnails/022/654/478/small_2x/generative-ai-illustration-of-valentine-day-background-love-romantic-concept-heart-shape-neural-network-generated-art-digitally-generated-image-not-based-on-any-actual-scene-or-pattern-photo.jpg'
+    }
+]
