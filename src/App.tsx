@@ -1,11 +1,12 @@
-import {Accordion} from './components/accordion/index.tsx';
-import {Stars} from './components/love/index.tsx';
-import {ImageSlider} from './components/image-slider/index.tsx';
-import { LoadMore } from './components/load-more/index.tsx';
+// import {Accordion} from './components/accordion/index.tsx';
+// import {Stars} from './components/love/index.tsx';
+// import {ImageSlider} from './components/image-slider/index.tsx';
+// import { LoadMore } from './components/load-more/index.tsx';
 // import { Treeview} from './components/tree-view/index.tsx';
 // import {navigationData} from './components/tree-view/index.ts'
-import {TreeViewStructure} from './components/Tree-view-correct/index.tsx';
-import {navigationData} from './components/Tree-view-correct/index.ts'
+// import {TreeViewStructure} from './components/Tree-view-correct/index.tsx';
+// import {navigationData} from './components/Tree-view-correct/index.ts'
+import Qrcode from './components/qr-code/index'
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           {/* <ImageSlider/> */}
           {/* <LoadMore/> */}
           {/* <Treeview node={navigationData}/> */}
-          <TreeViewStructure menus={navigationData}/>
+          {/* <TreeViewStructure menus={navigationData}/> */}
+          <Qrcode/>
           
         </div>
       </div>
