@@ -2,6 +2,8 @@ import {Accordion} from './components/accordion/index.tsx';
 import {Stars} from './components/love/index.tsx';
 import {ImageSlider} from './components/image-slider/index.tsx';
 import { LoadMore } from './components/load-more/index.tsx';
+import { Treeview} from './components/tree-view/index.tsx';
+import {navigationData} from './components/tree-view/index.ts'
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
         {/* <Accordion/> */}
           {/* <Stars numOfStars={5}/> */}
           {/* <ImageSlider/> */}
-          <LoadMore/>
+          {/* <LoadMore/> */}
+          <Treeview node={navigationData}/>
+          
         </div>
       </div>
   )
