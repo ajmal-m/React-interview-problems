@@ -1,0 +1,28 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --background:rgb(255, 255, 255);
+}
+[data-theme="dark"]{
+    --background:rgb(0, 0, 0);
+}
+.main-container{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    color: rgb(0, 0, 0);
+}
+
+.main-container button{
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight:700;
+    background-color: aqua;
+    cursor: pointer;
+}

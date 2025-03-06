@@ -5,23 +5,18 @@
 // import { Treeview} from './components/tree-view/index.tsx';
 // import {navigationData} from './components/tree-view/index.ts'
 // import {TreeViewStructure} from './components/Tree-view-correct/index.tsx';
-// import {navigationData} from './components/Tree-view-correct/index.ts'
-import Qrcode from './components/qr-code/index'
+// import {navigationData} from './components/Tree-view-correct/index.ts';
+// import Qrcode from './components/qr-code/index'
+// import {ThemeToggler} from './components/watch/index';
+// import './components/watch/index.css'
+import  './components/theme-toggler/index.css';
+import {ThemeToggler} from './components/theme-toggler/index'
 
 function App() {
   return (
-      <div className='main-container'>
-        <div className='accordion-container'>
-        {/* <Accordion/> */}
-          {/* <Stars numOfStars={5}/> */}
-          {/* <ImageSlider/> */}
-          {/* <LoadMore/> */}
-          {/* <Treeview node={navigationData}/> */}
-          {/* <TreeViewStructure menus={navigationData}/> */}
-          <Qrcode/>
-          
-        </div>
-      </div>
+      
+          <ThemeToggler/>
+
   )
 }
 
