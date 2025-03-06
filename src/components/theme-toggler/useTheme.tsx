@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-export const useTheme = (key,  defaultValue) => {
+export const useTheme = (key : string,  defaultValue : string) => {
 
-    const [value, setvalue] = useState((value) => {
-        console.log("value set", value)
+    const [value, setvalue] = useState(() => {
         let currentValue;
         try {
             currentValue = JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
