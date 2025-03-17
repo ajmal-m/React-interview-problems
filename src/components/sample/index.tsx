@@ -591,3 +591,50 @@ export const CounterApp = () => {
         </CounterProvider>
     )
 }
+
+
+
+
+const UserContext = createContext(null);
+
+export const UserContextApp = () => {
+    const [user, setUser] = useState({});
+    return <>
+    <UserContext.Provider value={{user, setUser}}>
+        <UserForm/>
+    </UserContext.Provider>
+    </>
+};
+
+
+const  UserForm = () => {
+    return <>
+        <Panel title="Welcome">
+            <LogInButton/>
+        </Panel>
+    </>
+};
+
+
+const LogInButton = () => {
+    const {user, setUser} = useContext(UserContext);
+
+    if(user.name){
+        return  <p>You logged in as {user.name}</p>
+    }
+    return <>
+        <button onClick={() => setUser({name:'ajmal'})}>
+            Login as AJMAL
+        </button>
+    </>
+}
+
+
+const Panel = ({title, children}) => {
+    return <>
+        <div style={{ padding:'12px', border:'1px solid black'}}>
+            <h2>{title}</h2>
+            {children}
+        </div>
+    </>
+}
