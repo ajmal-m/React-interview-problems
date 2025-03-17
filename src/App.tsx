@@ -9,14 +9,14 @@
 // import Qrcode from './components/qr-code/index'
 // import {ThemeToggler} from './components/watch/index';
 // import './components/watch/index.css'
-import  './components/theme-toggler/index.css';
-import {ThemeToggler} from './components/theme-toggler/index'
+// import  './components/theme-toggler/index.css';
+// import {ThemeToggler} from './components/theme-toggler/index'
+
+import {Sample, DemoUseActionState, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
 
 function App() {
   return (
-      
-          <ThemeToggler/>
-
+      <DemoUseActionState/>
   )
 }
 
