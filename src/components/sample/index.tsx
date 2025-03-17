@@ -1,4 +1,4 @@
-import { useActionState, useEffect, useRef, useState } from "react";
+import { memo, useActionState, useCallback, useEffect, useRef, useState } from "react";
 
 export const Sample = ()=> {
 
@@ -424,3 +424,68 @@ const FormUseActionState = ({itemTitle, itemID}:{ itemTitle ?: string, itemID ?:
     </form>
     </>
 }
+
+const getListItems = () => {
+    const arr = [];
+    for(let i=0; i< 5; i++){
+        arr.push(`List item - ${i+1}`);
+    }
+    return arr;
+}
+
+const ListItems = memo(() => {
+    const [list, setList] = useState(getListItems());
+    console.log("list items")
+    return <>
+        <ul>
+            {
+                list.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))
+            }
+        </ul>
+    </>
+});
+
+export const TestUseCallBack = () => {
+    const [num, setNum] = useState(4);
+
+    const updateNum = () => setNum(num => num+1);
+    return <>
+       <h2>Test Use call Back</h2>
+       <button onClick={updateNum} >{num} Times cliked</button>
+       <ListItems />
+    </>
+}
+
+
+
+export const TestUseCallBackTwo = () => {
+    const [num, setNum] = useState(4);
+    const [name, setName] = useState("");
+
+
+    const updateNum = useCallback(() => {
+        setNum(num => num+1);
+    }, [num]);
+
+    console.log("parent")
+
+
+    return <>
+    <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+       <h2>Test Use call Back</h2>
+       <ListTwo updateNum={updateNum} num={num}/>
+    </>
+}
+
+
+const ListTwo = memo(({updateNum, num} : {updateNum : () => void, num: number}) => {
+    console.log("lsit two")
+    return <>
+        <button onClick={updateNum} >{num} Times cliked</button>
+        <ul>
+           <li>List</li>
+        </ul>
+    </>
+});
