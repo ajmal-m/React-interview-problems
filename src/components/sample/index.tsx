@@ -1,4 +1,4 @@
-import { memo, useActionState, useCallback, useEffect, useRef, useState } from "react";
+import { createContext, memo, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export const Sample = ()=> {
 
@@ -489,3 +489,51 @@ const ListTwo = memo(({updateNum, num} : {updateNum : () => void, num: number}) 
         </ul>
     </>
 });
+
+export const ThemeContext = createContext(null);
+
+const ThemeForm = () => {
+    const {theme, setTheme} = useContext(ThemeContext);
+    return <>
+    <form action="" style={{
+        display:'flex',
+        flexDirection:"column",
+        border:'1px solid black',
+        padding:'12px',
+        background: theme === 'dark' ? 'black' : 'white',
+        color: theme === 'dark' ? 'white' : 'black'
+    }}>
+        <input type="text" />
+        <label htmlFor="">Email</label>
+        <input type="password" name="" id="" />
+        <label htmlFor="">Password</label>
+        <input type="checkbox" name="" checked={theme === 'dark'} onChange={() => setTheme(theme ==='dark' ? 'light' : 'dark')} id="" />{theme}
+    </form>
+    </>
+}
+
+
+const NameStick = memo(() => {
+    console.log("name component");
+    return <>
+        <h2>
+            name4554@gmail.com
+        </h2>
+    </>
+});
+
+export const ContextApp = () => {
+    const [theme, setTheme] = useState('light');
+    return <>
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            <input 
+                type="checkbox" 
+                checked={theme == 'dark'} 
+                name="theme" id="theme" 
+                onChange={() => setTheme( theme =='dark' ? 'light' : 'dark')}
+            />{theme}
+            <ThemeForm/>
+            <NameStick/>
+        </ThemeContext.Provider>
+    </>
+}
