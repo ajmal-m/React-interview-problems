@@ -1,4 +1,4 @@
-import { createContext, memo, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, memo, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export const Sample = ()=> {
 
@@ -536,4 +536,58 @@ export const ContextApp = () => {
             <NameStick/>
         </ThemeContext.Provider>
     </>
+}
+
+let CounterContext = createContext(null);
+
+const CounterProvider = ({children}) => {
+    const [count, setCount] = useState(3);
+    return <CounterContext value={{ count, updateCount: setCount}}>
+        {children}
+    </CounterContext>
+}
+
+const ComponentA = () => {
+    const {count, updateCount} = useContext(CounterContext);
+    return <>
+    <div style={{ border:'1px solid balck', borderRadius:'4px', padding:'12px'}}>
+        <h2>Count: {count}</h2>
+        <button onClick={() => updateCount(count => count+1)}>ADD</button>
+    </div>
+    </>
+}
+
+
+
+const ComponentB = () => {
+    const {count, updateCount} = useContext(CounterContext);
+    return <>
+    <div style={{ border:'1px solid balck', borderRadius:'4px', padding:'12px'}}>
+        <h2>Count: {count}</h2>
+        <button onClick={() => updateCount(count => count+1)}>ADD</button>
+    </div>
+    </>
+}
+
+
+
+const ComponentC = () => {
+    const {count, updateCount} = useContext(CounterContext);
+    return <>
+    <div style={{ border:'1px solid balck', borderRadius:'4px', padding:'12px'}}>
+        <h2>Count: {count}</h2>
+        <button onClick={() => updateCount(count => count+1)}>ADD</button>
+    </div>
+    </>
+}
+
+
+export const CounterApp = () => {
+    return(
+        <CounterProvider>
+            <ComponentA/>
+            <ComponentB/>
+            <ComponentC/>
+        </CounterProvider>
+    )
 }

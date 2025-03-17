@@ -12,11 +12,11 @@
 // import  './components/theme-toggler/index.css';
 // import {ThemeToggler} from './components/theme-toggler/index'
 
-import {Sample, ContextApp, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
+import {Sample, CounterApp, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
 
 function App() {
   return (
-      <ContextApp/>
+      <CounterApp/>
   )
 }
 
