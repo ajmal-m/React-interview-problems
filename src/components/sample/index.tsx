@@ -1,4 +1,4 @@
-import React, { createContext, memo, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { Children, createContext, memo, use, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export const Sample = ()=> {
 
@@ -636,5 +636,105 @@ const Panel = ({title, children}) => {
             <h2>{title}</h2>
             {children}
         </div>
+    </>
+}
+
+
+
+// Use context challenge-Two
+
+// Create Two context Theme and User
+const ThemeContextTwo = createContext(null);
+const UserContextTwo = createContext(null);
+
+// Create Two contxet provider component
+const ThemeContextTwoProvider = ({children}:any) => {
+    const [darkMode, setDarkMode] = useState(false);
+    return <ThemeContextTwo.Provider value={{darkMode, setDarkMode}}>
+        {children}
+    </ThemeContextTwo.Provider>
+};
+
+const UserContextTwoProvider = ({children}: any) => {
+    const [user, setUser] = useState({});
+    return <UserContextTwo.Provider value={{user, setUser}}>
+        {children}
+    </UserContextTwo.Provider>
+};
+
+
+export const UseContextChallengeTwo = () => {
+    return<>
+    <ThemeContextTwoProvider>
+        <UserContextTwoProvider>
+            <PanelTwo title={"Melcome"}>
+                <LoginFormTwo/>
+            </PanelTwo>
+            <ToggleTwo/>
+        </UserContextTwoProvider>
+    </ThemeContextTwoProvider>
+    </>
+};
+
+export const PanelTwo = ({ title, children }) => {
+    const {darkMode,setDarkMode } = useContext(ThemeContextTwo);
+    return <div style={{padding:'12px', border:'1px solid black', borderRadius:'4px', width:'300px', height:'100px', background: darkMode ? 'black' : 'white' , color:darkMode ? 'white' : 'black'}}>
+        <h1 style={{margin:'0px'}}>{title}</h1>
+        {children}
+    </div>
+};
+
+
+const LoginFormTwo = () => {
+    const {user, setUser} = useContext(UserContextTwo);
+    return <>
+    {
+        user.name ? (
+            <Greeting/>
+        ) : (
+           <LoginTwo />
+        )
+    }
+    </>
+};
+
+const Greeting = () => {
+    const {user, setUser} = useContext(UserContextTwo);
+    return <>
+        <p>You looged as {user.name}</p>
+    </>
+};
+
+
+const LoginTwo = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const {user, setUser} = useContext(UserContextTwo);
+
+    const isLoggable = firstName.trim() !== '' && lastName.trim() !== '' ;
+
+    const logIn = () => {
+        setUser({
+            name: firstName+' '+lastName
+        });
+    };
+
+    return <>
+         <div>
+           <label htmlFor="firstName">firstName:</label><input type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} id="firstname" />
+           <label htmlFor="firstName">lastname:</label><input type="text" value={lastName} name="lastName" onChange={(e) => setLastName(e.target.value)} id="lastname" />
+           <div>
+               <button disabled={!isLoggable} onClick={logIn}>Login</button> { !isLoggable && 'Fill both Fileds'}
+           </div>
+        </div>
+    </>
+}
+
+
+export const ToggleTwo = () => {
+    const {darkMode, setDarkMode} = useContext(ThemeContextTwo);
+    return <>
+        <input type="checkbox" name="theme" id="theme" value={darkMode} onChange={() => setDarkMode(d => !d)} />
+        Use dark mode
     </>
 }
