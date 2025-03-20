@@ -739,9 +739,18 @@ export const ToggleTwo = () => {
     </>
 };
 
-const reducer = (state) => {
-    console.log("Dispatch called and reduce function triggered.....");
-    return { count: state.count+1};
+const ADD_COUNT = 'add_count';
+const SUB_COUNT = 'sub_count';
+
+const reducer = (state, action) => {
+    switch(action.type){
+        case ADD_COUNT:
+            return { count : state.count + 1};
+        case SUB_COUNT:
+            return { count: state.count - 1};
+        default:
+            return state;
+    }
 };
 
 
@@ -749,8 +758,8 @@ export const ReducerTest = () => {
     const [state, dispatch] = useReducer(reducer, {count: 12})
    
     return <>
-        <button onClick={() => dispatch()}>+</button>
+        <button onClick={() => dispatch({ type: ADD_COUNT })}>+</button>
         {state.count}
-        <button  onClick={() => dispatch()}>-</button>
+        <button  onClick={() => dispatch({ type: SUB_COUNT})}>-</button>
     </>
 }
