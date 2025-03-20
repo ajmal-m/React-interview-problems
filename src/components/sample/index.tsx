@@ -901,7 +901,7 @@ const EditTask = ({task , dispatch, editTask} : {task: TaskType, dispatch: any, 
 
     const saveEditTask = () => {
         dispatch({ type: EDIT_TASK, payload: { id: task.id, task:editText }});
-        editTask(null);
+        editTask();
     };
 
 
@@ -918,7 +918,7 @@ const EditTask = ({task , dispatch, editTask} : {task: TaskType, dispatch: any, 
 
 const TaskItem = ({task, editTask} : {task: TaskType, editTask : any}) => {
     const updateTask = () => {
-        editTask(task.id);
+        editTask();
     };
 
     return <>
@@ -945,9 +945,9 @@ const ListTask = ({tasks, dispatch} : { tasks : TaskType[], dispatch: any}) => {
                 <input type="checkbox" name="task" id="task" checked={task.done} onChange={() => toggleUpdate(task)}/>
                 {
                     selectedEditTask ===task.id ? (
-                       <EditTask task={task} dispatch={dispatch}  editTask={setEditTask}/>
+                       <EditTask task={task} dispatch={dispatch}  editTask={() => setEditTask(null)}/>
                     ) : (
-                        <TaskItem task={task} editTask={setEditTask}/>
+                        <TaskItem task={task} editTask={() => setEditTask(task.id)}/>
                     )
                 }
                 <button onClick={() => deleteList(task)}>Delete</button>
