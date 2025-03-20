@@ -12,11 +12,11 @@
 // import  './components/theme-toggler/index.css';
 // import {ThemeToggler} from './components/theme-toggler/index'
 
-import {Sample, UseContextChallengeTwo, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
+import {Sample, ReducerTest, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
 
 function App() {
   return (
-      <UseContextChallengeTwo/>
+      <ReducerTest/>
   )
 }
 

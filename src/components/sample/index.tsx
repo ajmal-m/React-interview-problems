@@ -1,4 +1,4 @@
-import React, { Children, createContext, memo, use, useActionState, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { Children, createContext, memo, use, useActionState, useCallback, useContext, useEffect, useReducer, useRef, useState } from "react";
 
 export const Sample = ()=> {
 
@@ -736,5 +736,21 @@ export const ToggleTwo = () => {
     return <>
         <input type="checkbox" name="theme" id="theme" value={darkMode} onChange={() => setDarkMode(d => !d)} />
         Use dark mode
+    </>
+};
+
+const reducer = (state) => {
+    console.log("Dispatch called and reduce function triggered.....");
+    return { count: state.count+1};
+};
+
+
+export const ReducerTest = () => {
+    const [state, dispatch] = useReducer(reducer, {count: 12})
+   
+    return <>
+        <button onClick={() => dispatch()}>+</button>
+        {state.count}
+        <button  onClick={() => dispatch()}>-</button>
     </>
 }
