@@ -762,4 +762,41 @@ export const ReducerTest = () => {
         {state.count}
         <button  onClick={() => dispatch({ type: SUB_COUNT})}>-</button>
     </>
+};
+
+const UPDATE_NAME = 'update_name';
+const UPDATE_AGE = 'update_age';
+type ActionType = {
+    type: String,
+    payload ?:any
+}
+
+const reducerTwo = ( state : any,action : ActionType) => {
+    console.log(action, state)
+    switch (action.type) {
+        case UPDATE_NAME:
+            return { ...state, name: action.payload.name};
+            break;
+        case UPDATE_AGE:
+            return { ...state, age: state.age+1};
+            break;
+        default:
+            return state;
+            break;
+    }
+}
+
+export const UserReducerChallengeTwo = () => {
+    const [state, dispatch] = useReducer(reducerTwo, { name: 'Xavior', age:45});
+    const updateAge = () => {
+        dispatch({ type: UPDATE_AGE});
+    };
+    const updateName = (e : any) => {
+        dispatch({ type:UPDATE_NAME, payload : { name: e.target.value}});
+    }
+    return <>
+       <input type="text" name="Name" id="name" value={state.name}  onChange={updateName}/>
+       <button type="button" onClick={updateAge}>Increment Age</button>
+       <p>Hello, {state.name} You are {state.age}</p>
+    </>
 }
