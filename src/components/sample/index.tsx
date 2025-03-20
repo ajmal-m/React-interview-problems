@@ -896,43 +896,58 @@ const AddTask = ({ dispatch  }) => {
     </>
 };
 
-const ListTask = ({tasks, dispatch}) => {
-    const [isEdit , setEdit] = useState(null);
+const EditTask = ({task , dispatch, editTask} : {task: TaskType, dispatch: any, editTask : any}) => {
     const [editText, setEditText] = useState('');
+
+    const saveEditTask = () => {
+        dispatch({ type: EDIT_TASK, payload: { id: task.id, task:editText }});
+        editTask(null);
+    };
+
+
+    useEffect(()=> {
+        setEditText(task.task);
+    }, [])
+
+    return <>
+        <input type="text" name="edit-task" value={editText} id="edit-task"  onChange={e => setEditText(e.target.value)} />
+        <button onClick={saveEditTask}>Save</button>
+    </>
+};
+
+
+const TaskItem = ({task, editTask} : {task: TaskType, editTask : any}) => {
+    const updateTask = () => {
+        editTask(task.id);
+    };
+
+    return <>
+        {task.task}
+        <button onClick={updateTask}>Edit</button>
+    </>
+}
+
+const ListTask = ({tasks, dispatch} : { tasks : TaskType[], dispatch: any}) => {
+    const [selectedEditTask, setEditTask] = useState(null);
+
     const deleteList = (task : TaskType) => {
         dispatch({ type: DELETE_TASK, payload : { id: task.id}})
     };
 
-
-    const toggleUpdate = (task) => {
+    const toggleUpdate = (task : TaskType) => {
         dispatch({ type: TOGGLE_TASK, payload : { id: task.id}})
     };
 
-    const editTask  = (task) => {
-        setEditText(task.task)
-        setEdit(task.id);
-    };
-
-    const saveEditTask = () => {
-        dispatch({ type: EDIT_TASK, payload: { id: isEdit, task:editText }})
-        setEdit(null);
-    }
     return <>
     {
         tasks.length > 0 && tasks.map((task : TaskType, index : any) => (
             <div style={{ display:'flex', gap:'4px', marginTop:'22px'}} key={index}>
                 <input type="checkbox" name="task" id="task" checked={task.done} onChange={() => toggleUpdate(task)}/>
                 {
-                    isEdit ===task.id ? (
-                       <div>
-                        <input type="text" name="edit-task" value={editText} id="edit-task"  onChange={e => setEditText(e.target.value)} />
-                        <button onClick={saveEditTask}>Save</button>
-                       </div>
+                    selectedEditTask ===task.id ? (
+                       <EditTask task={task} dispatch={dispatch}  editTask={setEditTask}/>
                     ) : (
-                        <div>
-                            {task.task}
-                            <button onClick={() => editTask(task)}>Edit</button>
-                        </div>
+                        <TaskItem task={task} editTask={setEditTask}/>
                     )
                 }
                 <button onClick={() => deleteList(task)}>Delete</button>
