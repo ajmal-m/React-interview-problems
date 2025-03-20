@@ -799,4 +799,155 @@ export const UserReducerChallengeTwo = () => {
        <button type="button" onClick={updateAge}>Increment Age</button>
        <p>Hello, {state.name} You are {state.age}</p>
     </>
+};
+
+
+type TaskType = {
+    id: number,
+    task: string ,
+    done : boolean
+};
+
+type PrevStateType = {
+    tasks: TaskType[]
+}
+
+
+const ADD_TASK = 'add_task';
+const DELETE_TASK = 'delete_task';
+const TOGGLE_TASK = 'toggle_task';
+const EDIT_TASK = 'edit_task';
+
+const UseTask = () => {
+    const reducer = (prevState : PrevStateType, action: any) => {
+        try {
+            switch (action.type) {
+                case ADD_TASK:
+                    return {
+                        ...prevState,
+                        tasks:[
+                            ...prevState.tasks,
+                            {
+                                id: new Date(),
+                                task : action.payload.task,
+                                done:false
+                            }
+                        ]
+                    };
+                    break;
+                case DELETE_TASK:
+                    return {
+                        ...prevState,
+                        tasks: [
+                            ...prevState.tasks.filter(x => x.id !== action.payload.id)
+                        ]
+                    };
+                    break;
+                case TOGGLE_TASK:
+                    return {
+                        ...prevState,
+                        tasks:[
+                            ...prevState.tasks.map((x) => {
+                                if(x.id === action.payload.id) x.done = !x.done;
+                                return x;
+                            })
+                        ]
+                    }
+                    break;
+                case EDIT_TASK:
+                    return {
+                        ...prevState,
+                        tasks:[
+                            ...prevState.tasks.map((x) => {
+                                if(x.id === action.payload.id) x.task = action.payload.task;
+                                return x;
+                            })
+                        ]
+                    };
+                    break;
+                default:
+                    return prevState;
+                    break;
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
+    };
+
+    const [state, dispatch] = useReducer(reducer, { tasks:[] });
+
+    return {state, dispatch};
+}
+
+
+const AddTask = ({ dispatch  }) => {
+    const [task, setTask] = useState('');
+    const handleSubmit = (e : React.FormEvent) => {
+        e.preventDefault();
+        dispatch({ type: ADD_TASK, payload:{ task }});
+        setTask('');
+    }
+    return <>
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="task" id="task" placeholder="Add a Task" value={task} onChange={(e) => setTask(e.target.value)}/>
+            <button type="submit">Add</button>
+        </form>
+    </>
+};
+
+const ListTask = ({tasks, dispatch}) => {
+    const [isEdit , setEdit] = useState(null);
+    const [editText, setEditText] = useState('');
+    const deleteList = (task : TaskType) => {
+        dispatch({ type: DELETE_TASK, payload : { id: task.id}})
+    };
+
+
+    const toggleUpdate = (task) => {
+        dispatch({ type: TOGGLE_TASK, payload : { id: task.id}})
+    };
+
+    const editTask  = (task) => {
+        setEditText(task.task)
+        setEdit(task.id);
+    };
+
+    const saveEditTask = () => {
+        dispatch({ type: EDIT_TASK, payload: { id: isEdit, task:editText }})
+        setEdit(null);
+    }
+    return <>
+    {
+        tasks.length > 0 && tasks.map((task : TaskType, index : any) => (
+            <div style={{ display:'flex', gap:'4px', marginTop:'22px'}} key={index}>
+                <input type="checkbox" name="task" id="task" checked={task.done} onChange={() => toggleUpdate(task)}/>
+                {
+                    isEdit ===task.id ? (
+                       <div>
+                        <input type="text" name="edit-task" value={editText} id="edit-task"  onChange={e => setEditText(e.target.value)} />
+                        <button onClick={saveEditTask}>Save</button>
+                       </div>
+                    ) : (
+                        <div>
+                            {task.task}
+                            <button onClick={() => editTask(task)}>Edit</button>
+                        </div>
+                    )
+                }
+                <button onClick={() => deleteList(task)}>Delete</button>
+            </div>
+        ))
+    }
+    </>
+}
+
+
+
+export const UseReducerChallengeThird = () => {
+    const { state, dispatch} = UseTask();
+    return <>
+        <AddTask dispatch={dispatch}/>
+        <ListTask tasks={state.tasks} dispatch={dispatch}/>
+    </>
 }
