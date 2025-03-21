@@ -11,12 +11,11 @@
 // import './components/watch/index.css'
 // import  './components/theme-toggler/index.css';
 // import {ThemeToggler} from './components/theme-toggler/index'
-
-import {Sample, UseReducerChallengeThird, Counter, Stopwatch, Form, CatFriends, StateComponent,  VideoPlayer, CounterButton, NameAgeForm} from './components/sample/index'
+import ToDoApp from "./components/use-context-todo-app"
 
 function App() {
   return (
-      <UseReducerChallengeThird/>
+      <ToDoApp/>
   )
 }
 
