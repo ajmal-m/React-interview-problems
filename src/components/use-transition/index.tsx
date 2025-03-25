@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useTransition } from "react"
+import React, { JSX, useCallback, useState, useTransition } from "react"
 
 export const TransitionComponent = ({ title }: { title ?: string}) => {
     const [text, setText] = useState("");
@@ -32,5 +32,99 @@ export const TransitionComponent = ({ title }: { title ?: string}) => {
                 ))
             }
         </ul>
+    </>
+}
+
+
+const TabButton = ({children, action, isActive} : { children: React.ReactNode, action : () => void, isActive : boolean}) => {
+
+    const [isPending, startTransition] = useTransition();
+
+
+    if(isActive){
+        return <b>{children}</b>
+    };
+
+    const handleClick = () => {
+        startTransition(async () => {
+            action();
+        });
+    }
+    return <>
+        <button onClick={handleClick}>
+            { isPending ? 'Loading..' : children }
+        </button>
+    </>
+};
+
+
+const AboutTab = () => {
+    return <>
+        <p>ABout Tab</p>
+    </>
+};
+
+
+const ContactTab = () => {
+    return <>
+        <p>Contact Tab</p>
+    </>
+};
+
+
+const PostTab = () => {
+    const posts = [];
+
+    for(let i=0; i< 500; i++){
+        let j =0;
+        while(j < 4000000){
+            j++;
+        }
+        posts.push("HI")
+    }
+    return <>
+        <p>Post Tab</p>
+        <ul>
+            {
+                posts.map((txt , index) => (
+                    <li key={index}>{txt}</li>
+                ))
+            }
+        </ul>
+    </>
+};
+
+
+export const TransitionChallengeTwo = () => {
+    const [tab, setTab] = useState('about');
+    return <>
+        <TabButton
+            action={() => setTab('about')}
+            isActive = { tab === 'about'}
+        >
+            About
+        </TabButton>
+
+        <TabButton
+            action={() => setTab('posts')}
+            isActive = { tab === 'posts'}
+        >
+            Posts(SLOW)
+        </TabButton>
+
+
+        <TabButton
+            action={() => setTab('contact')}
+            isActive = { tab === 'contact'}
+        >
+            Contact
+        </TabButton>
+        <hr/>
+
+        { tab === 'about' && <AboutTab/> }
+
+        { tab === 'posts' && <PostTab/>}
+
+        {tab ===  'contact'  && <ContactTab/>}
     </>
 }
