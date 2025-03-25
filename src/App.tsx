@@ -10,12 +10,12 @@
 // import {ThemeToggler} from './components/watch/index';
 // import './components/watch/index.css'
 // import  './components/theme-toggler/index.css';
-// import {ThemeToggler} from './components/theme-toggler/index'
-import ToDoApp from "./components/use-context-todo-app"
-
+import { TransitionComponent } from "./components/use-transition/index"
 function App() {
   return (
-      <ToDoApp/>
+      <>
+        <TransitionComponent title="Hi World"/>
+      </>
   )
 }
 
