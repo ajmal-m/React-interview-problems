@@ -10,11 +10,12 @@
 // import {ThemeToggler} from './components/watch/index';
 // import './components/watch/index.css'
 // import  './components/theme-toggler/index.css';
-import { TransitionComponent } from "./components/use-transition/index"
+// import { TransitionComponent } from "./components/use-transition/index"
+import { CheckOutForm } from "./components/use-transition/check-out-form"
 function App() {
   return (
       <>
-        <TransitionComponent title="Hi World"/>
+        <CheckOutForm/>
       </>
   )
 }
