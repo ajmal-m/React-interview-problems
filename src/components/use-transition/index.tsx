@@ -1,13 +1,15 @@
-import React, { useState, useTransition } from "react"
+import React, { useCallback, useState, useTransition } from "react"
 
 export const TransitionComponent = ({ title }: { title ?: string}) => {
     const [text, setText] = useState("");
     const [list, setList] = useState<string[]>([]);
     const [isPending, startTransition] = useTransition();
+
+
     const LIST_LIMIT = 10000;
 
 
-    const handleChangeText = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeText = useCallback((e : React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
 
         startTransition(() => {
@@ -19,7 +21,7 @@ export const TransitionComponent = ({ title }: { title ?: string}) => {
             }
             setList(lst);
         });
-    }
+    }, []);
     return <>   
         <h1>{title}</h1>
         <input type="text" value={text} onChange={handleChangeText} />
