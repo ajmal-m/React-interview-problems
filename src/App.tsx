@@ -11,11 +11,16 @@
 // import './components/watch/index.css'
 // import  './components/theme-toggler/index.css';
 // import { TransitionComponent } from "./components/use-transition/index"
-import { MemoComponent } from "./components/use-memo"
+// import { MemoComponent } from "./components/use-memo"
+import { AuthProvider } from "./context/auth"
+import { MainContextApp, SecondPage } from "./components/context/inde"
 function App() {
   return (
       <>
-        <MemoComponent/>
+      <AuthProvider>
+        <MainContextApp/>
+        <SecondPage/>
+      </AuthProvider>
       </>
   )
 }
