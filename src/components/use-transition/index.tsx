@@ -1,4 +1,6 @@
-import React, { JSX, useCallback, useState, useTransition } from "react"
+import React, { JSX, useCallback, useState, useTransition } from "react";
+import { ErrorBoundary } from 'react-error-boundary';
+
 
 export const TransitionComponent = ({ title }: { title ?: string}) => {
     const [text, setText] = useState("");
@@ -127,4 +129,39 @@ export const TransitionChallengeTwo = () => {
 
         {tab ===  'contact'  && <ContactTab/>}
     </>
+};
+
+
+const addComment = () => {
+   throw new Error("Comment error occur")
 }
+
+const AddCommentButton = () => {
+    const [isPending, startTransition] = useTransition();
+    return <>
+        <button
+            disabled={isPending}
+            onClick={() => {
+                startTransition(() => {
+                    addComment();
+                });
+            }}
+        >
+            ADD COMMANT
+        </button>
+    </>
+}
+
+
+export const TransitionChallengeThree = () => {
+
+    return <>
+        <h2>Challenge Two</h2>
+        <ErrorBoundary fallback={<p>⚠️Something went wrong</p>}>
+            <AddCommentButton/>
+        </ErrorBoundary>
+    </>
+}
+
+
+
