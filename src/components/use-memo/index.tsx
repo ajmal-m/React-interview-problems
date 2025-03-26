@@ -9,10 +9,10 @@ export const MemoComponent = () => {
         console.log("list call")
         const ls = [];
         for(let i=0; i< 50; i++){
-            ls.push(`${i+1} : HI AJMAL M`);
+            ls.push(`${i+1} ${fname} ${lname}`);
         }
         return ls;
-    }, []);
+    }, [fname, lname]);
 
     const getFullName = useCallback(() => {
         const fullname = fname+" "+lname;
@@ -22,7 +22,7 @@ export const MemoComponent = () => {
 
     const lists = useMemo(() => {
         return listItems();
-    }, []);
+    }, [fname, lname]);
 
 
     const fullName = useMemo(() => {
