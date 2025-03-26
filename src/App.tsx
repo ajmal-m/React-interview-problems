@@ -11,11 +11,11 @@
 // import './components/watch/index.css'
 // import  './components/theme-toggler/index.css';
 // import { TransitionComponent } from "./components/use-transition/index"
-import { TransitionChallengeThree } from "./components/use-transition"
+import { MemoComponent } from "./components/use-memo"
 function App() {
   return (
       <>
-        <TransitionChallengeThree/>
+        <MemoComponent/>
       </>
   )
 }

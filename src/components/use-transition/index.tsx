@@ -161,7 +161,7 @@ export const TransitionChallengeThree = () => {
             <AddCommentButton/>
         </ErrorBoundary>
     </>
-}
+};
 
 
 
