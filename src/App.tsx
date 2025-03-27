@@ -12,15 +12,13 @@
 // import  './components/theme-toggler/index.css';
 // import { TransitionComponent } from "./components/use-transition/index"
 // import { MemoComponent } from "./components/use-memo"
-import { AuthProvider } from "./context/auth"
-import { MainContextApp, SecondPage } from "./components/context/inde"
+// import { AuthProvider } from "./context/auth"
+// import { MainContextApp, SecondPage } from "./components/context/inde"
+import { UseCallBackApp } from "./components/use-call-back"
 function App() {
   return (
       <>
-      <AuthProvider>
-        <MainContextApp/>
-        <SecondPage/>
-      </AuthProvider>
+        <UseCallBackApp/>
       </>
   )
 }
