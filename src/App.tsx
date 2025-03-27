@@ -14,11 +14,11 @@
 // import { MemoComponent } from "./components/use-memo"
 // import { AuthProvider } from "./context/auth"
 // import { MainContextApp, SecondPage } from "./components/context/inde"
-import { ToggleComponent } from "./components/use-call-back"
+import { CustomHookExmapleTwo } from "./components/use-call-back"
 function App() {
   return (
       <>
-        <ToggleComponent/>
+        <CustomHookExmapleTwo/>
       </>
   )
 }
